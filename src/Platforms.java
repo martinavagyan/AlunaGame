@@ -1,6 +1,5 @@
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class Platforms {
@@ -8,7 +7,7 @@ public class Platforms {
 	private int w = 80,h= 20;
 	private final int MAX_COLUMN_PLATFORMS = 9;
 	private final int MAX_ROW_PLATFORMS = 7;
-	private ArrayList<Rectangle> platformsHitbox;
+	private ArrayList<PlatformItem> platformsHitbox;
 	private int[][] platformGrid;
 	private int index;
 	
@@ -20,7 +19,7 @@ public class Platforms {
 	}
 	
 	public Platforms(){
-		platformsHitbox = new ArrayList<Rectangle>();
+		platformsHitbox = new ArrayList<PlatformItem>();
 		platformGrid = new int[MAX_COLUMN_PLATFORMS][MAX_ROW_PLATFORMS];
 		//initialize the grid with -1s
 		for (int i = 0; i < MAX_COLUMN_PLATFORMS; i++) {
@@ -30,7 +29,7 @@ public class Platforms {
 		}
 		index = 0;
 	}
-	public ArrayList<Rectangle> getPlatformsHitbox(){
+	public ArrayList<PlatformItem> getPlatformsHitbox(){
 		return platformsHitbox;
 	}
 	public int[][]  getPlatformGrid(){

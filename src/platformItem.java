@@ -1,4 +1,4 @@
 
-public abstract class platformItem {
+public abstract class PlatformItem {
 	
 }
