@@ -120,13 +120,13 @@ public class LevelDesign extends JPanel{
 		g.setColor(Color.red);
 		g.fillRect(playerHandler.getPlayerHitbox().x,playerHandler.getPlayerHitbox().y,playerHandler.getPlayerHitbox().width,playerHandler.getPlayerHitbox().height);
 		//Cloud Graphics
-		//for (int i = 0; i < platforms.getPlatforms().size(); i++) {	
-		//	if(platforms.getPlatforms().get(i).width == platforms.getW()){
-		//		g.drawImage(platformImage, platforms.getPlatforms().get(i).x-10, platforms.getPlatforms().get(i).y-2, platforms.getPlatforms().get(i).width+20,platforms.getPlatforms().get(i).height + 20, null);	
-		//	}else if (platforms.getPlatforms().get(i).width == platforms.getH()){
-		//		g.drawImage(wallImage, platforms.getPlatforms().get(i).x-10, platforms.getPlatforms().get(i).y-10, platforms.getPlatforms().get(i).width+20,platforms.getPlatforms().get(i).height+20, null);	
-		//	}
-		//}		
+		for (int i = 0; i < platforms.getPlatforms().size(); i++) {	
+			if(platforms.getPlatforms().get(i).width == platforms.getW()){
+				g.drawImage(platformImage, platforms.getPlatforms().get(i).x-10, platforms.getPlatforms().get(i).y-2, platforms.getPlatforms().get(i).width+20,platforms.getPlatforms().get(i).height + 20, null);	
+			}else if (platforms.getPlatforms().get(i).width == platforms.getH()){
+				g.drawImage(wallImage, platforms.getPlatforms().get(i).x-10, platforms.getPlatforms().get(i).y-10, platforms.getPlatforms().get(i).width+20,platforms.getPlatforms().get(i).height+20, null);	
+			}
+		}		
 		//g.dispose();
 	}
 }
