@@ -40,16 +40,13 @@ public class Platforms {
 	public void addCloud(int xPlacement, int yPlacement){
 		platforms.add(index, new CloudPlatform(new Rectangle(xPlacement*100,yPlacement*100,w,h)));
 		addToGrid(xPlacement,yPlacement);
-		//TODO animation goes here 
 	}
 	public void addObstacle(int xPlacement, int yPlacement){
 		platforms.add(index,  new ObstaclePlatform(new Rectangle(xPlacement*100,yPlacement*100,w,h)));
 		addToGrid(xPlacement,yPlacement);
-		//TODO animation goes here 
 	}
 	public void addWall(int xPlacement, int yPlacement){
 		platforms.add( new WallPlatform ( new Rectangle(xPlacement*100 - h,yPlacement*100-w,h,w)));		
-		//TODO animation goes here 
 	}
 	
 	public void addToGrid(int xPlacement, int yPlacement){

@@ -107,7 +107,8 @@ public class LevelDesign extends JPanel{
 				
 		//Draw the clouds
 	    for (int i = 0; i < platforms.getPlatforms().size(); i++) {	
-		    g.fillRect((int)platforms.getPlatforms().get(i).getRect().getX(), (int)platforms.getPlatforms().get(i).getRect().getY(),(int) platforms.getPlatforms().get(i).getRect().getWidth(), (int)platforms.getPlatforms().get(i).getRect().getHeight());		       
+	      platforms.getPlatforms().get(i).draw(g);
+		  //  g.fillRect((int)platforms.getPlatforms().get(i).getRect().getX(), (int)platforms.getPlatforms().get(i).getRect().getY(),(int) platforms.getPlatforms().get(i).getRect().getWidth(), (int)platforms.getPlatforms().get(i).getRect().getHeight());		       
 		}
 		
 		//draw the player
