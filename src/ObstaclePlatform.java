@@ -18,7 +18,8 @@ public class ObstaclePlatform extends PlatformItem{
 	}
 
 
+	@Override
 	public void draw(Graphics g) {
-
+		
 	}
 }

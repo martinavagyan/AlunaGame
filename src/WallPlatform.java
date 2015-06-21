@@ -18,8 +18,9 @@ public class WallPlatform extends PlatformItem{
 		this.rect = rect;
 	}
 
-
+	
+	@Override
 	public void draw(Graphics g) {
-
+		
 	}
 }

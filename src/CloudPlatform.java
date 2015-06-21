@@ -17,8 +17,8 @@ public class CloudPlatform extends PlatformItem{
 		this.rect = rect;
 	}
 
-
+	@Override
 	public void draw(Graphics g) {
-
+		g.fillRect((int)rect.getX(),(int)rect.getY(),(int)rect.getWidth(),(int)rect.getHeight());
 	}
 }
