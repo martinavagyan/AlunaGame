@@ -25,8 +25,8 @@ public class Platforms {
 		return MAX_ROW_PLATFORMS;
 	}
 	
-	public Platforms(){
-		anim = new Animation();
+	public Platforms(Animation anim){
+		this.anim = anim;
 		platforms = new ArrayList<PlatformItem>();
 		platformGrid = new int[MAX_COLUMN_PLATFORMS][MAX_ROW_PLATFORMS];
 		//initialize the grid with -1s

@@ -11,8 +11,8 @@ public class Item {
 	private final int MAX_COLUMN= 9,MAX_ROW= 7;//limits
 	private Animation anim;
 	
-	public Item(){
-		anim = new Animation();
+	public Item(Animation anim){
+		this.anim = anim;
 		items = new ArrayList<GameItem>();
 		nutGrid = new int[MAX_COLUMN][MAX_ROW];
 	

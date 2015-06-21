@@ -22,8 +22,8 @@ public class LevelDesign extends JPanel{
 	
 	//private Rectangle  platform = new Rectangle(0,HEIGHT*SCALE-40,WIDTH*SCALE,20);
 	private Animation animation = new Animation();
-	private Platforms platforms = new Platforms();
-	private Item gameItems = new Item();
+	private Platforms platforms = new Platforms(animation);
+	private Item gameItems = new Item(animation);
 	private BufferedImage playerImage;	
 	private BufferedImage platformImage;	
 	private BufferedImage wallImage;
