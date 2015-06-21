@@ -91,8 +91,9 @@ public class LevelDesign extends JPanel{
 	}
 	
 	public void generateItems(){
-		gameItems.addNut(2, 2); 
+		
 		gameItems.addNut(1, 3);
+		gameItems.addNut(2, 2); 
 		gameItems.addNut(4, 4);
 		gameItems.addKey(4,2);
 	}

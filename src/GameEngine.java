@@ -74,12 +74,27 @@ public class GameEngine {
 	}
 
 	public void boundarySensor() {		
-		playerHandler.predictMove();	// Predict the position of the player for the next tick.			
+		playerHandler.predictMove();	// Predict the position of the player for the next tick.
+		int predictedGridCell = getPredictedGridCell();
+		int predictedGridWall = getPredictedGridWall();
 		insideWindow();					//Check for player to be in game.	
-		underPlatform();				//Check if its about to hit a platform
-		onPlatform(); 					//Check if player is on platform.
-		itemCollision();
-		
+		//wallCollision(predictedGridWall);
+		underPlatform(predictedGridCell);				//Check if its about to hit a platform
+		onPlatform(predictedGridCell); 					//Check if player is on platform.
+		itemCollision();		
+	}
+	public int getPredictedGridCell(){
+		if(isLegalGrid()){
+			return -1;
+		}
+		return level.getPlatforms().getPlatformGrid()[(int)(playerHandler.getPredictedX()/100)][(int)(playerHandler.getPredictedY()/100)];		
+	}
+	
+	public int getPredictedGridWall(){
+		if(isLegalGrid()){
+			return -1;
+		}
+		return level.getPlatforms().getWallGrid()[(int)(playerHandler.getPredictedX()/100)][(int)(playerHandler.getPredictedY()/100)];	
 	}
 	
 	private void itemCollision(){
@@ -89,43 +104,41 @@ public class GameEngine {
 		int gridCell = level.getGameItems().getItemGrid()[(int)(playerHandler.getPlayerHitbox().getX()/100)][(int)(playerHandler.getPlayerHitbox().getY()/100)];
 
 		if(gridCell !=-1){
+			System.out.println("ture");
 			collectItem(gridCell);			
 			
 		}
 	}
-	public void collectItem(int predictedGridCell){
+	public void collectItem(int gridCell){
 		//TODO add item to squrrel item bag
 		//level.getGameItems().getItems().get(predictedGridCell);
-		level.getGameItems().removeItem(predictedGridCell,(int)(playerHandler.getPredictedY()/100),(int)(playerHandler.getPredictedY()/100));
-		
+		level.getGameItems().removeItem(gridCell,(int)(playerHandler.getPlayerHitbox().getX()/100),(int)(playerHandler.getPlayerHitbox().getX()/100));		
+	}
+	public void wallCollision(int predictedGridWall){
+		if(predictedGridWall !=-1){
+			playerHandler.setJump(false);
+			playerHandler.setXD(0);
+			freeFall();
+		}
 	}
 	
-	public void onPlatform(){
+	public void onPlatform(int predictedGridCell){
 		if(playerHandler.getPseudoGravity() <= 1){
 			return;
 		}
-		if(isLegalGrid()){
-			return;
-		}
-		int predictedGridCell = level.getPlatforms().getPlatformGrid()[(int)(playerHandler.getPredictedX()/100)][(int)(playerHandler.getPredictedY()/100)];
 		if(predictedGridCell !=-1){
 			playerHandler.getPlayerHitbox().y = (int)level.getPlatforms().getPlatforms().get(predictedGridCell).getRect().getY();
 			playerHandler.setJump(false);
 			freeFall();
 		}
 	}
-	public void underPlatform(){	
+	public void underPlatform(int predictedGridCell){	
 		if(playerHandler.getPseudoGravity() < 0){
-			if(isLegalGrid()){
-				System.out.println("legal grid: false");
-				return;
-			}
-			if(level.getPlatforms().getPlatformGrid()[(int)(playerHandler.getPredictedX()/100)][(int)(playerHandler.getPredictedY()/100)] !=-1){
+			if(predictedGridCell !=-1){
 				freeFall();
 			}			
 		}		
-	}
-	
+	}	
 	public boolean isLegalGrid(){
 		return (level.getPlatforms().getMAX_COLUMN_PLATFORMS() <= (int)(playerHandler.getPredictedX()/100)|| 
 				level.getPlatforms().getMAX_ROW_PLATFORMS()    <= (int)playerHandler.getPredictedY()/100);
