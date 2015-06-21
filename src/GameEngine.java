@@ -1,5 +1,4 @@
 import java.awt.Rectangle;
-import java.util.Timer;
 
 public class GameEngine {
 
@@ -7,10 +6,6 @@ public class GameEngine {
 	private PlayerController playerHandler;
 	private LevelDesign level;
 	private boolean running = true;
-	private int count = 0;
-	private 
-	Timer t = new Timer();
-	Timer t2 = new Timer();
 
 	public GameEngine() {
 		playerHandler = new PlayerController();
@@ -19,8 +14,8 @@ public class GameEngine {
 		while(running){
 			try {
 			    Thread.sleep(16);                 //1000 milliseconds is one second.
-			} catch(InterruptedException ex) {	    
-				
+			} catch(InterruptedException e) {	    
+				e.printStackTrace();
 			}
 			render();
 			updateGame();
@@ -78,7 +73,7 @@ public class GameEngine {
 		int predictedGridCell = getPredictedGridCell();
 		int predictedGridWall = getPredictedGridWall();
 		insideWindow();					//Check for player to be in game.	
-		//wallCollision(predictedGridWall);
+		wallCollision(predictedGridWall);
 		underPlatform(predictedGridCell);				//Check if its about to hit a platform
 		onPlatform(predictedGridCell); 					//Check if player is on platform.
 		itemCollision();		
@@ -105,14 +100,13 @@ public class GameEngine {
 
 		if(gridCell !=-1){
 			System.out.println("ture");
-			collectItem(gridCell);			
-			
+			collectItem(gridCell);		
 		}
 	}
 	public void collectItem(int gridCell){
 		//TODO add item to squrrel item bag
 		//level.getGameItems().getItems().get(predictedGridCell);
-		level.getGameItems().removeItem(gridCell,(int)(playerHandler.getPlayerHitbox().getX()/100),(int)(playerHandler.getPlayerHitbox().getX()/100));		
+		level.getGameItems().removeItem(gridCell,(int)(playerHandler.getPlayerHitbox().getX()/100),(int)(playerHandler.getPlayerHitbox().getY()/100));		
 	}
 	public void wallCollision(int predictedGridWall){
 		if(predictedGridWall !=-1){
@@ -157,7 +151,10 @@ public class GameEngine {
 		}
 	}
 	public void gameOver(){
-		running = false;
+		//running = false;
+		playerHandler.setPlayerHitbox(new Rectangle(playerHandler.getX(),playerHandler.getY(),playerHandler.getW(),playerHandler.getH()));
+		level.generateItems();
+		level.setRunning(false);
 	}
 	public void freeFall(){
 		playerHandler.setPseudoGravity(1);

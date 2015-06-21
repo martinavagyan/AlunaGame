@@ -24,6 +24,7 @@ public class ObstaclePlatform extends PlatformItem{
 	}
 	@Override
 	public void drawPlatformImage(Graphics g) {
-		g.drawImage(anim.getPlatfromObstacleImage(),(int)rect.getX() - 10 ,(int)rect.getY() - 2,(int)rect.getWidth() + 20,(int)rect.getHeight() + 20,null);
+		g.drawImage(anim.getPlatformCloudImage(),(int)rect.getX() - 10 ,(int)rect.getY() - 2,(int)rect.getWidth() + 20,(int)rect.getHeight() + 20,null);
+		g.drawImage(anim.getAnimationFire(),(int)rect.getX() - 25 ,(int)rect.getY() - (int)rect.getHeight()-30,(int)rect.getWidth() + 50,(int)rect.getHeight() + 50,null);
 	}
 }

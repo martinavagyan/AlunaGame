@@ -25,6 +25,6 @@ public class WallPlatform extends PlatformItem{
 	}
 	@Override
 	public void drawPlatformImage(Graphics g) {
-		g.drawImage(anim.getPlatformWallImage(),(int)rect.getX() - 10 ,(int)rect.getY() - 2,(int)rect.getWidth() + 20,(int)rect.getHeight() + 20,null);
+		g.drawImage(anim.getPlatformWallImage(),(int)rect.getX()+50,(int)rect.getY()+10,(int)rect.getWidth(),(int)rect.getHeight()+20,null);
 	}
 }

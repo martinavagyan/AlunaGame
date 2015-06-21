@@ -13,6 +13,7 @@ public class LevelDesign extends JPanel{
 	
 	private JFrame frame;
 	private PlayerController playerHandler;
+	private Menu menu = new Menu();
 	
 	public static final int WIDTH = 160;
 	public static final int HEIGHT = WIDTH/12*9;
@@ -27,16 +28,8 @@ public class LevelDesign extends JPanel{
 	private BufferedImage platformImage;	
 	private BufferedImage wallImage;
 	
-	
-	public Animation getAnimation() {
-		return animation;
-	}
-	public Item getGameItems() {
-		return gameItems;
-	}
-	public void setPlayerImage(BufferedImage image){
-		playerImage = image;
-	}
+	//Control variable for the state of the game:
+	private boolean running = false;
 	
 	public LevelDesign(PlayerController playerHandler){
 		this.playerHandler=playerHandler;
@@ -60,6 +53,7 @@ public class LevelDesign extends JPanel{
 		requestFocusInWindow();
 		addKeyListener(playerHandler);
 		playerImage = animation.getPlayerImageRight();
+		addMouseListener(new MouseController(menu,this));
 		
 		//level settings
 		generateLevelPlatform();
@@ -90,12 +84,13 @@ public class LevelDesign extends JPanel{
 		platforms.addObstacle(8, 5);	
 	}
 	
+	
 	public void generateItems(){
 		
 		gameItems.addNut(1, 3);
 		gameItems.addNut(2, 2); 
 		gameItems.addNut(4, 4);
-		gameItems.addKey(4,2);
+		gameItems.addKey(5,2);
 	}
 	public Platforms getPlatforms(){
 		return platforms;
@@ -106,29 +101,45 @@ public class LevelDesign extends JPanel{
 		//Draw the Background
 		g.drawImage(animation.getBackgroundTheme(), 0, 0,WIDTH*SCALE,HEIGHT*SCALE, null);
 						
-		//Draw the clouds
-		size = platforms.getPlatforms().size();
-	    for (int i = 0; i < size; i++) {		    	
-	      platforms.getPlatforms().get(i).draw(g);
-    	}
-	    
-	  //Draw the items	
-	    ArrayList<GameItem> items =  gameItems.getItems();
-	    for (int i = 0; i < items.size(); i++) {	
-	    	GameItem currentItem = items.get(i);
-    		if(currentItem != null)
-    			currentItem.drawItemImage(g);
-		}
-	    
-		//Draw the player
-		g.drawImage(playerImage,playerHandler.getPlayerHitbox().x - playerHandler.getPlayerSize()/2-playerHandler.getPlayerSize()*20/100,
-			     	playerHandler.getPlayerHitbox().y - playerHandler.getPlayerSize(),
-			     	playerHandler.getPlayerSize(),playerHandler.getPlayerSize(), null);
 		
-		//Cloud Graphics
-		for (int i = 0; i < platforms.getPlatforms().size(); i++) {	
-			platforms.getPlatforms().get(i).drawPlatformImage(g);
-		}
-		//g.dispose();
+	    if(running == true){
+		    //Draw the items	
+		    ArrayList<GameItem> items =  gameItems.getItems();
+		    for (int i = 0; i < items.size(); i++) {	
+		    	GameItem currentItem = items.get(i);
+	    		if(currentItem != null)
+	    			currentItem.drawItemImage(g);
+			}
+		    
+			//Draw the player
+			g.drawImage(playerImage,playerHandler.getPlayerHitbox().x - playerHandler.getPlayerSize()/2-playerHandler.getPlayerSize()*20/100,
+				     	playerHandler.getPlayerHitbox().y - playerHandler.getPlayerSize(),
+				     	playerHandler.getPlayerSize(),playerHandler.getPlayerSize(), null);
+			
+			//Cloud Graphics
+			for (int i = 0; i < platforms.getPlatforms().size(); i++) {	
+				platforms.getPlatforms().get(i).drawPlatformImage(g);
+			}
+	    }else{
+	    	menu.render(g);
+	    }
+	}
+	
+	public Animation getAnimation() {
+		return animation;
+	}
+	public Item getGameItems() {
+		return gameItems;
+	}
+	public void setPlayerImage(BufferedImage image){
+		playerImage = image;
+	}
+	
+	public boolean isRunning() {
+		return running;
+	}
+
+	public void setRunning(boolean running) {
+		this.running = running;
 	}
 }

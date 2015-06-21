@@ -9,7 +9,7 @@ public class PlayerController implements KeyListener{
 	
 	
 	private static final int playerSize = 70;
-	protected int x=5,y=500;						//Coordinates of the starting position
+	protected int x=0,y=500;						//Coordinates of the starting position
 	protected int w=1,h=1;							//Dimensions of the object HitBox
 	protected int xD=0; 							//Direction of movement on x axis
 	private double predictedX,predictedY;			//predicted coordinates of the HitBox
@@ -34,7 +34,7 @@ public class PlayerController implements KeyListener{
 	private boolean jumpReleased = false;			//Jump is only allowed from platform
 	
 	//Player hitbox
-	private Rectangle playerHitbox = new Rectangle(objectScaleConstant/2,y,w,h);
+	private Rectangle playerHitbox = new Rectangle(x+objectScaleConstant/2,y,w,h);
 	
 	
 	//Getters & Setters
@@ -90,6 +90,10 @@ public class PlayerController implements KeyListener{
 		hasKey = key;
 	}
 	
+	public void setPlayerHitbox(Rectangle hitbox){
+		this.playerHitbox = hitbox;
+	}
+	
 
 	public void setPseudoGravity(double pseudoGravity) {
 		this.pseudoGravity = pseudoGravity;
@@ -103,9 +107,11 @@ public class PlayerController implements KeyListener{
 		this.jump=jump;
 	}
 	
+	
+	
 	//Movement function of the game
 	public void move(){
-		playerHitbox.x +=xD;
+		playerHitbox.x +=xD; 
 		xD = 0;
 		if(pseudoGravity*gravityAcceleration <= maxGravityVelocity){
 			playerHitbox.y +=pseudoGravity*gravityAcceleration;
