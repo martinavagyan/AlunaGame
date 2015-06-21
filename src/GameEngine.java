@@ -82,7 +82,7 @@ public class GameEngine {
 	public void onPlatform(){
 		int predictedGridCell = level.getPlatforms().getPlatformGrid()[(int)(playerHandler.getPredictedX()/100)][(int)(playerHandler.getPredictedY()/100)];
 		if(predictedGridCell !=-1){
-			playerHandler.getPlayerHitbox().y = level.getPlatforms().getPlatformsHitbox().get(predictedGridCell).y;
+			playerHandler.getPlayerHitbox().y = (int)level.getPlatforms().getPlatforms().get(predictedGridCell).getRect().getY();
 			playerHandler.setJump(false);
 			playerHandler.setPseudoGravity(1);
 			playerHandler.setJumpReleased(false);
