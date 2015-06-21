@@ -14,8 +14,8 @@ public class PlayerController implements KeyListener{
 	protected int xD=0; 							//Direction of movement on x axis
 	private double predictedX,predictedY;			//predicted coordinates of the HitBox
 	
-	private final double startingGravity = 2;
-	private final double gravityAcceleration = 1.11;//The constant gravity acceleration
+	private final double startingGravity = 1;
+	private final double gravityAcceleration = 1.09;//The constant gravity acceleration
 	private double pseudoGravity = startingGravity;		        //Pseudo-gravity on y axis
 	protected final int maxGravityVelocity = 19;	//The max speed the acceleration can have
 	private final int jumpAcceleration = 5;			//Jump acceleration
