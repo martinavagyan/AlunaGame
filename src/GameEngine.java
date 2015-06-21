@@ -81,6 +81,19 @@ public class GameEngine {
 		
 	}
 	
+	private void itemCollision(){
+		if(isLegalGrid()){
+			return;
+		}
+		int predictedGridCell = level.getPlatforms().getPlatformGrid()[(int)(playerHandler.getPredictedX()/100)][(int)(playerHandler.getPredictedY()/100)];
+		if(predictedGridCell !=-1){
+			playerHandler.getPlayerHitbox().y = (int)level.getPlatforms().getPlatforms().get(predictedGridCell).getRect().getY();
+			playerHandler.setJump(false);
+			playerHandler.setPseudoGravity(1);
+			playerHandler.setJumpReleased(false);
+		}
+	}
+	
 	public void onPlatform(){
 		if(playerHandler.getPseudoGravity() <= 1){
 			return;
@@ -97,17 +110,12 @@ public class GameEngine {
 		}
 	}
 	public void underPlatform(){	
-		System.out.println("under the platform: check");
 		if(playerHandler.getPseudoGravity() < 0){
-			System.out.println("legal grid: check");
 			if(isLegalGrid()){
 				System.out.println("legal grid: false");
 				return;
 			}
-			System.out.println("legal grid: true");
-			System.out.println("legal platform: check");
 			if(level.getPlatforms().getPlatformGrid()[(int)(playerHandler.getPredictedX()/100)][(int)(playerHandler.getPredictedY()/100)] !=-1){
-				System.out.println("legal platform: true");
 				freeFall();
 			}			
 		}		

@@ -11,6 +11,8 @@ public class Animation {
 	private BufferedImage playerImageLeft;	
 	private BufferedImage platformCloudImage;	
 	private BufferedImage platformWallImage;	
+	private BufferedImage nutImage;
+	private BufferedImage keyImage;
 	
 	private BufferedImage platfromObstacleImage;
 	
@@ -35,11 +37,16 @@ public class Animation {
 				
 		
 			platformWallImage = ImageIO.read(new File("res/platformWall.png"));
+			
+			nutImage = ImageIO.read(new File("res/nut.png"));
+			
+			keyImage = ImageIO.read(new File("res/key.png"));
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 		
 	}
+	
 	
 	public BufferedImage getPlayerImageRight(){
 		return playerImageRight;
@@ -56,6 +63,15 @@ public class Animation {
 	public BufferedImage getPlatfromObstacleImage(){
 		return platfromObstacleImage;
 	}
+	
+	public BufferedImage getNutImage(){
+		return nutImage;
+	}
+	public BufferedImage getKeyImage(){
+		return keyImage;
+	}
+	
+	
 	public Image getBackgroundTheme(){
 		return backgroundTheme;
 	}

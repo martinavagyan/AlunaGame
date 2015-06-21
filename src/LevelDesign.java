@@ -23,6 +23,7 @@ public class LevelDesign extends JPanel{
 	//private Rectangle  platform = new Rectangle(0,HEIGHT*SCALE-40,WIDTH*SCALE,20);
 	private Animation animation = new Animation();
 	private Platforms platforms = new Platforms();
+	private Item gameItems = new Item();
 	private BufferedImage playerImage;	
 	private BufferedImage platformImage;	
 	private BufferedImage wallImage;
@@ -60,7 +61,7 @@ public class LevelDesign extends JPanel{
 		
 		//level settings
 		generateLevelPlatform();
-		
+		generateItems();
 	}	
 	
 	public void generateLevelPlatform(){
@@ -86,6 +87,13 @@ public class LevelDesign extends JPanel{
 		platforms.addCloud(8, 3);	
 		platforms.addObstacle(8, 5);	
 	}
+	
+	public void generateItems(){
+		gameItems.addNut(2, 2); 
+		gameItems.addNut(1, 3);
+		gameItems.addNut(4, 4);
+		gameItems.addKey(4,2);
+	}
 	public Platforms getPlatforms(){
 		return platforms;
 	}
@@ -98,7 +106,12 @@ public class LevelDesign extends JPanel{
 	    for (int i = 0; i < platforms.getPlatforms().size(); i++) {	
 	      platforms.getPlatforms().get(i).draw(g);
     	}
-		
+	    
+	  //Draw the Nuts		
+	    for (int i = 0; i < gameItems.getItems().size(); i++) {	
+	    	gameItems.getItems().get(i).drawItemImage(g);
+		}
+	    
 		//Draw the player
 		g.drawImage(playerImage,playerHandler.getPlayerHitbox().x - playerHandler.getPlayerSize()/2-playerHandler.getPlayerSize()*20/100,
 			     	playerHandler.getPlayerHitbox().y - playerHandler.getPlayerSize(),
