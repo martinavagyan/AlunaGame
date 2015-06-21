@@ -9,8 +9,10 @@ import javax.imageio.ImageIO;
 public class Animation {
 	private BufferedImage playerImageRight;	
 	private BufferedImage playerImageLeft;	
-	private BufferedImage platformImage;	
-	private BufferedImage wallImage;	
+	private BufferedImage platformCloudImage;	
+	private BufferedImage platformWallImage;	
+	
+	private BufferedImage platfromObstacleImage;
 	
 	private Image backgroundTheme;
 	
@@ -19,36 +21,40 @@ public class Animation {
 		//read player image
 		try {
 			playerImageRight = ImageIO.read(new File("res/0r.png"));
-		} catch (IOException e) {}
-		try {
+
+
 			playerImageLeft = ImageIO.read(new File("res/0l.png"));
-		} catch (IOException e) {}
-		//read background image
-		try {
+
+
 			backgroundTheme = ImageIO.read(new File("res/background4.png"));
-		} catch (IOException e) {}
-		//platform image
-		try {
-			platformImage = ImageIO.read(new File("res/platform.png"));
-		} catch (IOException e) {}
-		//platform image
-		try {
-			wallImage = ImageIO.read(new File("res/wall3.png"));
-		} catch (IOException e) {}
+
+
+			platformCloudImage = ImageIO.read(new File("res/platformCloud.png"));
+			
+			platfromObstacleImage = ImageIO.read(new File("res/platformObstacle.png"));
+				
+		
+			platformWallImage = ImageIO.read(new File("res/platformWall.png"));
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 		
 	}
 	
 	public BufferedImage getPlayerImageRight(){
 		return playerImageRight;
 	}	
-	public BufferedImage getWallImage(){
-		return wallImage;
+	public BufferedImage getPlatformWallImage(){
+		return platformWallImage;
 	}
 	public BufferedImage getPlayerImageLeft(){
 		return playerImageLeft;
 	}
-	public BufferedImage getPlatformImage(){
-		return platformImage;
+	public BufferedImage getPlatformCloudImage(){
+		return platformCloudImage;
+	}
+	public BufferedImage getPlatfromObstacleImage(){
+		return platfromObstacleImage;
 	}
 	public Image getBackgroundTheme(){
 		return backgroundTheme;

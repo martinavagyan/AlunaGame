@@ -10,6 +10,7 @@ public class Platforms {
 	private ArrayList<PlatformItem> platforms;
 	private int[][] platformGrid;
 	private int index;
+	private Animation anim;
 	
 	public int getW(){
 		return w;
@@ -38,15 +39,15 @@ public class Platforms {
 	
 	//different types of platforms, each has an argument for placement 
 	public void addCloud(int xPlacement, int yPlacement){
-		platforms.add(index, new CloudPlatform(new Rectangle(xPlacement*100,yPlacement*100,w,h)));
+		platforms.add(index, new CloudPlatform(new Rectangle(xPlacement*100,yPlacement*100,w,h),anim));
 		addToGrid(xPlacement,yPlacement);
 	}
 	public void addObstacle(int xPlacement, int yPlacement){
-		platforms.add(index,  new ObstaclePlatform(new Rectangle(xPlacement*100,yPlacement*100,w,h)));
+		platforms.add(index,  new ObstaclePlatform(new Rectangle(xPlacement*100,yPlacement*100,w,h),anim));
 		addToGrid(xPlacement,yPlacement);
 	}
 	public void addWall(int xPlacement, int yPlacement){
-		platforms.add( new WallPlatform ( new Rectangle(xPlacement*100 - h,yPlacement*100-w,h,w)));		
+		platforms.add( new WallPlatform ( new Rectangle(xPlacement*100 - h,yPlacement*100-w,h,w),anim));		
 	}
 	
 	public void addToGrid(int xPlacement, int yPlacement){

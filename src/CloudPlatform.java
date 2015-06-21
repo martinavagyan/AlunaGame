@@ -3,9 +3,10 @@ import java.awt.Rectangle;
 
 
 public class CloudPlatform extends PlatformItem{
-
-	public CloudPlatform(Rectangle rect) {
-		super(rect);
+	
+	
+	public CloudPlatform(Rectangle rect, Animation anim) {
+		super(rect,anim);
 	}	
 	
 	public Rectangle getRect() {
@@ -20,5 +21,9 @@ public class CloudPlatform extends PlatformItem{
 	@Override
 	public void draw(Graphics g) {
 		g.fillRect((int)rect.getX(),(int)rect.getY(),(int)rect.getWidth(),(int)rect.getHeight());
+	}
+	@Override
+	public void drawPlatformImage(Graphics g) {
+		g.drawImage(anim.getPlatformCloudImage(),(int)rect.getX() - 10 ,(int)rect.getY() - 2,(int)rect.getWidth() + 20,(int)rect.getHeight() + 20,null);
 	}
 }

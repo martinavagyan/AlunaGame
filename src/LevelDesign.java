@@ -59,8 +59,6 @@ public class LevelDesign extends JPanel{
 		requestFocusInWindow();
 		addKeyListener(playerHandler);
 		playerImage = animation.getPlayerImageRight();
-		platformImage =  animation.getPlatformImage();
-		wallImage = animation.getWallImage();
 		
 		//level settings
 		generateLevelPlatform();
@@ -121,12 +119,8 @@ public class LevelDesign extends JPanel{
 		g.fillRect(playerHandler.getPlayerHitbox().x,playerHandler.getPlayerHitbox().y,playerHandler.getPlayerHitbox().width,playerHandler.getPlayerHitbox().height);
 		//Cloud Graphics
 		for (int i = 0; i < platforms.getPlatforms().size(); i++) {	
-			if(platforms.getPlatforms().get(i).width == platforms.getW()){
-				g.drawImage(platformImage, platforms.getPlatforms().get(i).x-10, platforms.getPlatforms().get(i).y-2, platforms.getPlatforms().get(i).width+20,platforms.getPlatforms().get(i).height + 20, null);	
-			}else if (platforms.getPlatforms().get(i).width == platforms.getH()){
-				g.drawImage(wallImage, platforms.getPlatforms().get(i).x-10, platforms.getPlatforms().get(i).y-10, platforms.getPlatforms().get(i).width+20,platforms.getPlatforms().get(i).height+20, null);	
-			}
-		}		
+		//	platforms.getPlatforms().get(i).drawPlatformImage(g);
+		}
 		//g.dispose();
 	}
 }
