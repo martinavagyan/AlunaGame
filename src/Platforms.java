@@ -18,8 +18,15 @@ public class Platforms {
 	public int getH(){
 		return h;
 	}
+	public int getMAX_COLUMN_PLATFORMS(){
+		return MAX_COLUMN_PLATFORMS;
+	}
+	public int getMAX_ROW_PLATFORMS(){
+		return MAX_ROW_PLATFORMS;
+	}
 	
 	public Platforms(){
+		anim = new Animation();
 		platforms = new ArrayList<PlatformItem>();
 		platformGrid = new int[MAX_COLUMN_PLATFORMS][MAX_ROW_PLATFORMS];
 		//initialize the grid with -1s
@@ -43,7 +50,7 @@ public class Platforms {
 		addToGrid(xPlacement,yPlacement);
 	}
 	public void addObstacle(int xPlacement, int yPlacement){
-		platforms.add(index,  new ObstaclePlatform(new Rectangle(xPlacement*100,yPlacement*100,w,h),anim));
+		platforms.add(index, new ObstaclePlatform(new Rectangle(xPlacement*100,yPlacement*100,w,h),anim));
 		addToGrid(xPlacement,yPlacement);
 	}
 	public void addWall(int xPlacement, int yPlacement){

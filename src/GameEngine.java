@@ -75,11 +75,19 @@ public class GameEngine {
 
 	public void boundarySensor() {		
 		playerHandler.predictMove();	// Predict the position of the player for the next tick.			
-		insideWindow();					//Check for player to be in game.		
+		insideWindow();					//Check for player to be in game.	
+		underPlatform();				//Check if its about to hit a platform
 		onPlatform(); 					//Check if player is on platform.
+		
 	}
 	
 	public void onPlatform(){
+		if(playerHandler.getPseudoGravity() <= 1){
+			return;
+		}
+		if(isLegalGrid()){
+			return;
+		}
 		int predictedGridCell = level.getPlatforms().getPlatformGrid()[(int)(playerHandler.getPredictedX()/100)][(int)(playerHandler.getPredictedY()/100)];
 		if(predictedGridCell !=-1){
 			playerHandler.getPlayerHitbox().y = (int)level.getPlatforms().getPlatforms().get(predictedGridCell).getRect().getY();
@@ -88,14 +96,45 @@ public class GameEngine {
 			playerHandler.setJumpReleased(false);
 		}
 	}
+	public void underPlatform(){	
+		System.out.println("under the platform: check");
+		if(playerHandler.getPseudoGravity() < 0){
+			System.out.println("legal grid: check");
+			if(isLegalGrid()){
+				System.out.println("legal grid: false");
+				return;
+			}
+			System.out.println("legal grid: true");
+			System.out.println("legal platform: check");
+			if(level.getPlatforms().getPlatformGrid()[(int)(playerHandler.getPredictedX()/100)][(int)(playerHandler.getPredictedY()/100)] !=-1){
+				System.out.println("legal platform: true");
+				freeFall();
+			}			
+		}		
+	}
+	
+	public boolean isLegalGrid(){
+		return (level.getPlatforms().getMAX_COLUMN_PLATFORMS() <= (int)(playerHandler.getPredictedX()/100)|| 
+				level.getPlatforms().getMAX_ROW_PLATFORMS()    <= (int)playerHandler.getPredictedY()/100);
+	}
 	public void insideWindow(){
 		// Check according to prediction for x and y coordinates
-		if (playerHandler.getPredictedY() > level.HEIGHT * level.SCALE || playerHandler.getPredictedY() < 0) {
-			playerHandler.setPseudoGravity(1);
-			playerHandler.setJumpReleased(false);
+		if (playerHandler.getPredictedY() - playerHandler.getPlayerSize() + 10 < 0) {
+			freeFall();
+		}
+		else if (playerHandler.getPredictedY() > level.HEIGHT * level.SCALE ){
+			//TODO player dead
+			gameOver();
 		}
 		if (playerHandler.getPredictedX() > level.WIDTH * level.SCALE || playerHandler.getPredictedX() < 0) {
 			playerHandler.setXD(0);
 		}
+	}
+	public void gameOver(){
+		running = false;
+	}
+	public void freeFall(){
+		playerHandler.setPseudoGravity(1);
+		playerHandler.setJumpReleased(false);
 	}
 }

@@ -20,16 +20,14 @@ public class LevelDesign extends JPanel{
 	public static final int SCALE = 6;//W = 960, H = 720.
 	public static final String NAME = "Game";
 	
-	private Rectangle  platform = new Rectangle(0,HEIGHT*SCALE-40,WIDTH*SCALE,20);
+	//private Rectangle  platform = new Rectangle(0,HEIGHT*SCALE-40,WIDTH*SCALE,20);
 	private Animation animation = new Animation();
 	private Platforms platforms = new Platforms();
 	private BufferedImage playerImage;	
 	private BufferedImage platformImage;	
 	private BufferedImage wallImage;
 	
-	public Rectangle getPlatform() {
-		return platform;
-	}
+	
 	public Animation getAnimation() {
 		return animation;
 	}
@@ -85,41 +83,30 @@ public class LevelDesign extends JPanel{
 		platforms.addCloud(6, 2);
 		platforms.addCloud(7, 2);
 		platforms.addCloud(8, 1);
-		platforms.addCloud(8, 3);		
+		platforms.addCloud(8, 3);	
+		platforms.addObstacle(8, 5);	
 	}
 	public Platforms getPlatforms(){
 		return platforms;
 	}
 	
-	public void paintComponent(Graphics g){
-		//super.paintComponent(g);
-		
+	public void paintComponent(Graphics g){		
 		//Draw the Background
-		g.setColor(Color.cyan);
-		g.fillRect(0,0,getWidth(),getHeight());
 		g.drawImage(animation.getBackgroundTheme(), 0, 0,WIDTH*SCALE,HEIGHT*SCALE, null);
-		
-		//Draw the main Platform
-		g.setColor(Color.white);
-		g.fillRect(platform.x, platform.y, platform.width,platform.height);
-				
+						
 		//Draw the clouds
 	    for (int i = 0; i < platforms.getPlatforms().size(); i++) {	
 	      platforms.getPlatforms().get(i).draw(g);
-		  //  g.fillRect((int)platforms.getPlatforms().get(i).getRect().getX(), (int)platforms.getPlatforms().get(i).getRect().getY(),(int) platforms.getPlatforms().get(i).getRect().getWidth(), (int)platforms.getPlatforms().get(i).getRect().getHeight());		       
-		}
+    	}
 		
-		//draw the player
+		//Draw the player
 		g.drawImage(playerImage,playerHandler.getPlayerHitbox().x - playerHandler.getPlayerSize()/2-playerHandler.getPlayerSize()*20/100,
 			     	playerHandler.getPlayerHitbox().y - playerHandler.getPlayerSize(),
 			     	playerHandler.getPlayerSize(),playerHandler.getPlayerSize(), null);
 		
-		//Draw the Player
-		g.setColor(Color.red);
-		g.fillRect(playerHandler.getPlayerHitbox().x,playerHandler.getPlayerHitbox().y,playerHandler.getPlayerHitbox().width,playerHandler.getPlayerHitbox().height);
 		//Cloud Graphics
 		for (int i = 0; i < platforms.getPlatforms().size(); i++) {	
-		//	platforms.getPlatforms().get(i).drawPlatformImage(g);
+			platforms.getPlatforms().get(i).drawPlatformImage(g);
 		}
 		//g.dispose();
 	}
