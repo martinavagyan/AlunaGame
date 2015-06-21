@@ -106,8 +106,8 @@ public class LevelDesign extends JPanel{
 		g.fillRect(platform.x, platform.y, platform.width,platform.height);
 				
 		//Draw the clouds
-	    for (int i = 0; i < platforms.getPlatformsHitbox().size(); i++) {	
-		    g.fillRect(platforms.getPlatformsHitbox().get(i).x, platforms.getPlatformsHitbox().get(i).y, platforms.getPlatformsHitbox().get(i).width,platforms.getPlatformsHitbox().get(i).height);		       
+	    for (int i = 0; i < platforms.getPlatforms().size(); i++) {	
+		    g.fillRect((int)platforms.getPlatforms().get(i).getRect().getX(), (int)platforms.getPlatforms().get(i).getRect().getY(),(int) platforms.getPlatforms().get(i).getRect().getWidth(), (int)platforms.getPlatforms().get(i).getRect().getHeight());		       
 		}
 		
 		//draw the player
@@ -119,13 +119,13 @@ public class LevelDesign extends JPanel{
 		g.setColor(Color.red);
 		g.fillRect(playerHandler.getPlayerHitbox().x,playerHandler.getPlayerHitbox().y,playerHandler.getPlayerHitbox().width,playerHandler.getPlayerHitbox().height);
 		//Cloud Graphics
-		for (int i = 0; i < platforms.getPlatformsHitbox().size(); i++) {	
-			if(platforms.getPlatformsHitbox().get(i).width == platforms.getW()){
-				g.drawImage(platformImage, platforms.getPlatformsHitbox().get(i).x-10, platforms.getPlatformsHitbox().get(i).y-2, platforms.getPlatformsHitbox().get(i).width+20,platforms.getPlatformsHitbox().get(i).height + 20, null);	
-			}else if (platforms.getPlatformsHitbox().get(i).width == platforms.getH()){
-				g.drawImage(wallImage, platforms.getPlatformsHitbox().get(i).x-10, platforms.getPlatformsHitbox().get(i).y-10, platforms.getPlatformsHitbox().get(i).width+20,platforms.getPlatformsHitbox().get(i).height+20, null);	
-			}
-		}		
+		//for (int i = 0; i < platforms.getPlatforms().size(); i++) {	
+		//	if(platforms.getPlatforms().get(i).width == platforms.getW()){
+		//		g.drawImage(platformImage, platforms.getPlatforms().get(i).x-10, platforms.getPlatforms().get(i).y-2, platforms.getPlatforms().get(i).width+20,platforms.getPlatforms().get(i).height + 20, null);	
+		//	}else if (platforms.getPlatforms().get(i).width == platforms.getH()){
+		//		g.drawImage(wallImage, platforms.getPlatforms().get(i).x-10, platforms.getPlatforms().get(i).y-10, platforms.getPlatforms().get(i).width+20,platforms.getPlatforms().get(i).height+20, null);	
+		//	}
+		//}		
 		//g.dispose();
 	}
 }

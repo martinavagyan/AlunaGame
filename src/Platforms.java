@@ -7,7 +7,7 @@ public class Platforms {
 	private int w = 80,h= 20;
 	private final int MAX_COLUMN_PLATFORMS = 9;
 	private final int MAX_ROW_PLATFORMS = 7;
-	private ArrayList<PlatformItem> platformsHitbox;
+	private ArrayList<PlatformItem> platforms;
 	private int[][] platformGrid;
 	private int index;
 	
@@ -19,7 +19,7 @@ public class Platforms {
 	}
 	
 	public Platforms(){
-		platformsHitbox = new ArrayList<PlatformItem>();
+		platforms = new ArrayList<PlatformItem>();
 		platformGrid = new int[MAX_COLUMN_PLATFORMS][MAX_ROW_PLATFORMS];
 		//initialize the grid with -1s
 		for (int i = 0; i < MAX_COLUMN_PLATFORMS; i++) {
@@ -29,8 +29,8 @@ public class Platforms {
 		}
 		index = 0;
 	}
-	public ArrayList<PlatformItem> getPlatformsHitbox(){
-		return platformsHitbox;
+	public ArrayList<PlatformItem> getPlatforms(){
+		return platforms;
 	}
 	public int[][]  getPlatformGrid(){
 		return platformGrid;
@@ -38,17 +38,17 @@ public class Platforms {
 	
 	//different types of platforms, each has an argument for placement 
 	public void addCloud(int xPlacement, int yPlacement){
-		platformsHitbox.add(index, new Rectangle(xPlacement*100,yPlacement*100,w,h));
+		platforms.add(index, new CloudPlatform(new Rectangle(xPlacement*100,yPlacement*100,w,h)));
 		addToGrid(xPlacement,yPlacement);
 		//TODO animation goes here 
 	}
 	public void addObstacle(int xPlacement, int yPlacement){
-		platformsHitbox.add( new Rectangle(xPlacement*100,yPlacement*100,w,h));
+		platforms.add(index,  new ObstaclePlatform(new Rectangle(xPlacement*100,yPlacement*100,w,h)));
 		addToGrid(xPlacement,yPlacement);
 		//TODO animation goes here 
 	}
 	public void addWall(int xPlacement, int yPlacement){
-		platformsHitbox.add( new Rectangle(xPlacement*100 - h,yPlacement*100-w,h,w));		
+		platforms.add( new WallPlatform ( new Rectangle(xPlacement*100 - h,yPlacement*100-w,h,w)));		
 		//TODO animation goes here 
 	}
 	
