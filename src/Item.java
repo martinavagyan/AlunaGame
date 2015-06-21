@@ -1,12 +1,13 @@
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class Item {
 
 	private int w = 25,h= 35;					//width, height of a nut
 	private ArrayList<GameItem> items;	//array containing all the nuts
-	private int[][] nutGrid;					//placement grid 
+	private int[][] itemGrid;					//placement grid 
 	private int index;
 	private final int MAX_COLUMN= 9,MAX_ROW= 7;//limits
 	private Animation anim;
@@ -14,12 +15,12 @@ public class Item {
 	public Item(Animation anim){
 		this.anim = anim;
 		items = new ArrayList<GameItem>();
-		nutGrid = new int[MAX_COLUMN][MAX_ROW];
+		itemGrid = new int[MAX_COLUMN][MAX_ROW];
 	
 		//initialize the grid with -1s
 		for (int i = 0; i < MAX_COLUMN; i++) {
 			for(int j = 0; j <MAX_ROW;j++){
-				nutGrid[i][j] = -1;
+				itemGrid[i][j] = -1;
 			}
 		}
 		index = 0;
@@ -41,15 +42,22 @@ public class Item {
 		this.items = items;
 	}
 	
-	public int[][]  getNutGrid(){
-		return nutGrid;
+	public int[][]  getItemGrid(){
+		return itemGrid;
 	}
 	
 	//Methods
 	//Removes the element at index i and returns the arraylist
-	public ArrayList<GameItem> newNutsHitbox(int i,  ArrayList<GameItem> items) {
-		items.remove(i);
-		return items;
+	public void removeItem(GameItem removeItem,int x, int y) {
+		itemGrid[x][y] = -1;
+		
+		Iterator<GameItem> itr = items.iterator();
+        while (itr.hasNext()) {
+        	GameItem item = itr.next();
+        	if(item == removeItem){
+        		items.remove(item);
+        	}
+        }
 	}
 	
 	public void addKey(int xPlacement, int yPlacement){
@@ -65,7 +73,7 @@ public class Item {
 	}
 
 	public void addToGrid(int xPlacement, int yPlacement){
-		nutGrid[xPlacement][yPlacement] = index;
+		itemGrid[xPlacement][yPlacement] = index;
 		index++;
 	}
 }

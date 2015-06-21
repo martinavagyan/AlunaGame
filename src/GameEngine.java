@@ -78,6 +78,7 @@ public class GameEngine {
 		insideWindow();					//Check for player to be in game.	
 		underPlatform();				//Check if its about to hit a platform
 		onPlatform(); 					//Check if player is on platform.
+		itemCollision();
 		
 	}
 	
@@ -85,13 +86,17 @@ public class GameEngine {
 		if(isLegalGrid()){
 			return;
 		}
-		int predictedGridCell = level.getPlatforms().getPlatformGrid()[(int)(playerHandler.getPredictedX()/100)][(int)(playerHandler.getPredictedY()/100)];
+		int predictedGridCell = level.getGameItems().getItemGrid()[(int)(playerHandler.getPredictedX()/100)][(int)(playerHandler.getPredictedY()/100)];
 		if(predictedGridCell !=-1){
-			playerHandler.getPlayerHitbox().y = (int)level.getPlatforms().getPlatforms().get(predictedGridCell).getRect().getY();
-			playerHandler.setJump(false);
-			playerHandler.setPseudoGravity(1);
-			playerHandler.setJumpReleased(false);
+			collectItem(predictedGridCell);
+			level.getGameItems().getItems().get(predictedGridCell).getRect().getY();			
 		}
+	}
+	public void collectItem(int predictedGridCell){
+		//TODO add item to squrrel item bag
+		//level.getGameItems().getItems().get(predictedGridCell);
+		level.getGameItems().removeItem(level.getGameItems().getItems().get(predictedGridCell),(int)(playerHandler.getPredictedX()/100),(int)(playerHandler.getPredictedY()/100));
+		
 	}
 	
 	public void onPlatform(){
@@ -105,8 +110,7 @@ public class GameEngine {
 		if(predictedGridCell !=-1){
 			playerHandler.getPlayerHitbox().y = (int)level.getPlatforms().getPlatforms().get(predictedGridCell).getRect().getY();
 			playerHandler.setJump(false);
-			playerHandler.setPseudoGravity(1);
-			playerHandler.setJumpReleased(false);
+			freeFall();
 		}
 	}
 	public void underPlatform(){	

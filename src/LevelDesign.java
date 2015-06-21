@@ -32,6 +32,9 @@ public class LevelDesign extends JPanel{
 	public Animation getAnimation() {
 		return animation;
 	}
+	public Item getGameItems() {
+		return gameItems;
+	}
 	public void setPlayerImage(BufferedImage image){
 		playerImage = image;
 	}
@@ -107,9 +110,9 @@ public class LevelDesign extends JPanel{
 	      platforms.getPlatforms().get(i).draw(g);
     	}
 	    
-	  //Draw the Nuts		
+	  //Draw the items		
 	    for (int i = 0; i < gameItems.getItems().size(); i++) {	
-	    	gameItems.getItems().get(i).drawItemImage(g);
+	    		gameItems.getItems().get(i).drawItemImage(g);
 		}
 	    
 		//Draw the player
