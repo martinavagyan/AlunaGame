@@ -14,8 +14,8 @@ public class PlayerController implements KeyListener{
 	protected int xD=0; 							//Direction of movement on x axis
 	private double predictedX,predictedY;			//predicted coordinates of the HitBox
 	
-	private final double startingGravity = 3;
-	private final double gravityAcceleration = 1.08;//The constant gravity acceleration
+	private final double startingGravity = 2;
+	private final double gravityAcceleration = 1.11;//The constant gravity acceleration
 	private double pseudoGravity = startingGravity;		        //Pseudo-gravity on y axis
 	protected final int maxGravityVelocity = 19;	//The max speed the acceleration can have
 	private final int jumpAcceleration = 5;			//Jump acceleration
@@ -74,6 +74,10 @@ public class PlayerController implements KeyListener{
 		return playerHitbox;
 	}
 
+	public double getPseudoGravity() {
+		return pseudoGravity;
+	}
+	
 	public void setXD(int xD) {
 		this.xD = xD;
 	}
@@ -140,7 +144,7 @@ public class PlayerController implements KeyListener{
 		setXD(0);
 		//When the space bar is released set gravity to 1, jumpReleased become stay false
 		if(e.getKeyCode() == KeyEvent.VK_SPACE && jumpReleased == true){
-			pseudoGravity = 1;
+			pseudoGravity = startingGravity;
 			jumpReleased = false;
 		}
 		if(e.getKeyCode() == KeyEvent.VK_A){
