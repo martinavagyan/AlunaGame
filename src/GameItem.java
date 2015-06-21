@@ -6,6 +6,7 @@ public abstract class GameItem {
 	protected Rectangle rect;
 	protected Animation anim;
 	
+
 	public GameItem(Rectangle rect, Animation anim){
 		this.rect = rect;
 		this.anim = anim;

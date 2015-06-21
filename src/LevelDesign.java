@@ -1,9 +1,8 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -101,18 +100,23 @@ public class LevelDesign extends JPanel{
 		return platforms;
 	}
 	
-	public void paintComponent(Graphics g){		
+	public void paintComponent(Graphics g){	
+		int size;
 		//Draw the Background
 		g.drawImage(animation.getBackgroundTheme(), 0, 0,WIDTH*SCALE,HEIGHT*SCALE, null);
 						
 		//Draw the clouds
-	    for (int i = 0; i < platforms.getPlatforms().size(); i++) {	
+		size = platforms.getPlatforms().size();
+	    for (int i = 0; i < size; i++) {		    	
 	      platforms.getPlatforms().get(i).draw(g);
     	}
 	    
-	  //Draw the items		
-	    for (int i = 0; i < gameItems.getItems().size(); i++) {	
-	    		gameItems.getItems().get(i).drawItemImage(g);
+	  //Draw the items	
+	    ArrayList<GameItem> items =  gameItems.getItems();
+	    for (int i = 0; i < items.size(); i++) {	
+	    	GameItem currentItem = items.get(i);
+    		if(currentItem != null)
+    			currentItem.drawItemImage(g);
 		}
 	    
 		//Draw the player

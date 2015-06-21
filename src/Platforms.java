@@ -9,6 +9,7 @@ public class Platforms {
 	private final int MAX_ROW_PLATFORMS = 7;
 	private ArrayList<PlatformItem> platforms;
 	private int[][] platformGrid;
+	private int[][] wallGrid;
 	private int index;
 	private Animation anim;
 	
@@ -29,10 +30,12 @@ public class Platforms {
 		this.anim = anim;
 		platforms = new ArrayList<PlatformItem>();
 		platformGrid = new int[MAX_COLUMN_PLATFORMS][MAX_ROW_PLATFORMS];
+		wallGrid =  new int[MAX_COLUMN_PLATFORMS][MAX_ROW_PLATFORMS];
 		//initialize the grid with -1s
 		for (int i = 0; i < MAX_COLUMN_PLATFORMS; i++) {
 			for(int j = 0; j <MAX_ROW_PLATFORMS;j++){
 				platformGrid[i][j] = -1;
+				wallGrid[i][j] = -1;
 			}
 		}
 		index = 0;
@@ -42,6 +45,9 @@ public class Platforms {
 	}
 	public int[][]  getPlatformGrid(){
 		return platformGrid;
+	}
+	public int[][]  getWallGrid(){
+		return wallGrid;
 	}
 	
 	//different types of platforms, each has an argument for placement 
@@ -54,7 +60,13 @@ public class Platforms {
 		addToGrid(xPlacement,yPlacement);
 	}
 	public void addWall(int xPlacement, int yPlacement){
-		platforms.add( new WallPlatform ( new Rectangle(xPlacement*100 - h,yPlacement*100-w,h,w),anim));		
+		platforms.add( new WallPlatform ( new Rectangle(xPlacement*100 - h,yPlacement*100-w,h,w),anim));
+		addToWallGrid (xPlacement,yPlacement);
+	}
+	
+	public void addToWallGrid(int xPlacement, int yPlacement){
+		wallGrid[xPlacement][yPlacement] = index;
+		index++;
 	}
 	
 	public void addToGrid(int xPlacement, int yPlacement){

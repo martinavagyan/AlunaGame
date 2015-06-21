@@ -48,16 +48,17 @@ public class Item {
 	
 	//Methods
 	//Removes the element at index i and returns the arraylist
-	public void removeItem(GameItem removeItem,int x, int y) {
+	public void removeItem(int i,int x, int y) {
 		itemGrid[x][y] = -1;
 		
-		Iterator<GameItem> itr = items.iterator();
+		items.set(i,null);
+		/*Iterator<GameItem> itr = items.iterator();
         while (itr.hasNext()) {
         	GameItem item = itr.next();
         	if(item == removeItem){
-        		items.remove(item);
+        		itr.remove();
         	}
-        }
+        }*/
 	}
 	
 	public void addKey(int xPlacement, int yPlacement){

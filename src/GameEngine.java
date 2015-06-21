@@ -86,16 +86,17 @@ public class GameEngine {
 		if(isLegalGrid()){
 			return;
 		}
-		int predictedGridCell = level.getGameItems().getItemGrid()[(int)(playerHandler.getPredictedX()/100)][(int)(playerHandler.getPredictedY()/100)];
-		if(predictedGridCell !=-1){
-			collectItem(predictedGridCell);
-			level.getGameItems().getItems().get(predictedGridCell).getRect().getY();			
+		int gridCell = level.getGameItems().getItemGrid()[(int)(playerHandler.getPlayerHitbox().getX()/100)][(int)(playerHandler.getPlayerHitbox().getY()/100)];
+
+		if(gridCell !=-1){
+			collectItem(gridCell);			
+			
 		}
 	}
 	public void collectItem(int predictedGridCell){
 		//TODO add item to squrrel item bag
 		//level.getGameItems().getItems().get(predictedGridCell);
-		level.getGameItems().removeItem(level.getGameItems().getItems().get(predictedGridCell),(int)(playerHandler.getPredictedX()/100),(int)(playerHandler.getPredictedY()/100));
+		level.getGameItems().removeItem(predictedGridCell,(int)(playerHandler.getPredictedY()/100),(int)(playerHandler.getPredictedY()/100));
 		
 	}
 	

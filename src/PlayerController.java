@@ -14,6 +14,10 @@ public class PlayerController implements KeyListener{
 	protected int xD=0; 							//Direction of movement on x axis
 	private double predictedX,predictedY;			//predicted coordinates of the HitBox
 	
+	//Player gears
+	private int nutCount = 0;	
+	private boolean hasKey = false;
+	
 	private final double startingGravity = 1;
 	private final double gravityAcceleration = 1.09;//The constant gravity acceleration
 	private double pseudoGravity = startingGravity;		        //Pseudo-gravity on y axis
@@ -81,6 +85,11 @@ public class PlayerController implements KeyListener{
 	public void setXD(int xD) {
 		this.xD = xD;
 	}
+	
+	public void setHasKey(boolean key){
+		hasKey = key;
+	}
+	
 
 	public void setPseudoGravity(double pseudoGravity) {
 		this.pseudoGravity = pseudoGravity;
