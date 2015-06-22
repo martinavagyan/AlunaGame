@@ -29,6 +29,19 @@ public class LevelDesign extends JPanel{
 	private SelectLevel gameLevels = new SelectLevel(animation);
 	private LevelLoader levelLoad = new LevelLoader(platforms,gameItems);
 	
+	
+	public static int getWIDTH() {
+		return WIDTH;
+	}
+
+	public static int getHEIGHT() {
+		return HEIGHT;
+	}
+
+	public static int getSCALE() {
+		return SCALE;
+	}
+
 	public LevelLoader getLevelLoad() {
 		return levelLoad;
 	}

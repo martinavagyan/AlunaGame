@@ -1,6 +1,5 @@
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 
 public class Item {

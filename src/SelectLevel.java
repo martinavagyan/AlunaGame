@@ -9,7 +9,7 @@ public class SelectLevel {
 	
 	private static final int NUMBEROF_LEVELS = 9;
 	
-	public static int getNumberofLevels() {
+	public int getNumberofLevels() {
 		return NUMBEROF_LEVELS;
 	}
 

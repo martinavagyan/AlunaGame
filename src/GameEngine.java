@@ -160,16 +160,16 @@ public class GameEngine {
 		if (playerHandler.getPredictedY() - playerHandler.getPlayerSize() + 10 < 0) {
 			freeFall();
 		}
-		else if (playerHandler.getPredictedY() > level.HEIGHT * level.SCALE ){
-			//TODO player dead
+		else if (playerHandler.getPredictedY() > LevelDesign.getHEIGHT() * LevelDesign.getSCALE() ){
 			gameOver();
 		}
-		if (playerHandler.getPredictedX() > level.WIDTH * level.SCALE || playerHandler.getPredictedX() < 0) {
+		if (playerHandler.getPredictedX() > LevelDesign.getWIDTH() * LevelDesign.getSCALE() || playerHandler.getPredictedX() < 0) {
 			playerHandler.setXD(0);
 		}
 	}
 	public void isGameOver(){
 		if(playerHandler.getPlayer().getPlayerHealth()<=0){
+			//Player Dies
 			gameOver();
 		}
 		if(player.getPlayerScore().getLevelKey() !=0){

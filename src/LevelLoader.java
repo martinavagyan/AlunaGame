@@ -82,8 +82,8 @@ public class LevelLoader {
 		
 		startingX = 1;
 		startingY = 1;
-		exitX = 4;
-		exitY = 6;
+		exitX = 2;
+		exitY = 1;
 	}
 	
 	public void level3(){
@@ -92,9 +92,11 @@ public class LevelLoader {
 		platforms.addObstacle(1, 5);
 		platforms.addObstacle(2, 5);
 		platforms.addObstacle(3, 5);
+		platforms.addCloud(3, 3);
 		platforms.addObstacle(4, 5);
 		platforms.addObstacle(5, 5);
 		platforms.addObstacle(6, 5);
+		platforms.addCloud(6, 3);
 		platforms.addObstacle(7, 5);
 		platforms.addObstacle(8, 5);
 		
@@ -106,7 +108,7 @@ public class LevelLoader {
 		startingX = 1;
 		startingY = 1;
 		exitX = 3;
-		exitY = 3;
+		exitY = 2;
 	}
 	
 	

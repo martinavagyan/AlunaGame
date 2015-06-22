@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 
 public class ScorePanel {
@@ -10,11 +9,9 @@ public class ScorePanel {
 
 
 	private int levelKey;
-	private int h = 100;
 	private int w = 350;
     private int x = LevelDesign.SCALE*LevelDesign.WIDTH -  w;
     private int y = 0;
-	private Rectangle rect;
 	private PlayerObject player;
 	
 	public ScorePanel(PlayerObject player){
@@ -22,7 +19,6 @@ public class ScorePanel {
 		levelKey = 0;
 		highScore = 0;
 		nutCount = 0;
-		rect = new Rectangle(x,y,w,h);
 	}
 	
 	public int getNutCount() {
@@ -35,9 +31,6 @@ public class ScorePanel {
 		return levelKey;
 	}
 
-	public void setRect(Rectangle rect) {
-		this.rect = rect;
-	}
 	public void iterNutCount(){
 		nutCount++;
 	}
