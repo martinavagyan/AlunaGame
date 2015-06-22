@@ -11,14 +11,16 @@ public class GameEngine {
 		playerHandler = new PlayerController();
 		level = new LevelDesign(playerHandler);
 
-		while(running){
+		while(true){
 			try {
 			    Thread.sleep(16);                 //1000 milliseconds is one second.
 			} catch(InterruptedException e) {	    
 				e.printStackTrace();
 			}
-			render();
-			updateGame();
+			if(level.isRunning()){
+				render();
+				updateGame();
+			}
 		}
 		
 		//run();
@@ -104,8 +106,12 @@ public class GameEngine {
 		}
 	}
 	public void collectItem(int gridCell){
-		//TODO add item to squrrel item bag
-		//level.getGameItems().getItems().get(predictedGridCell);
+		if(level.getGameItems().getItems().get(gridCell) instanceof  NutItem){
+			playerHandler.getPlayer().getPlayerScore().iterNutCount();
+		}
+		else if (level.getGameItems().getItems().get(gridCell) instanceof  KeyItem){
+			playerHandler.getPlayer().getPlayerScore().iterLevelKey();
+		}
 		level.getGameItems().removeItem(gridCell,(int)(playerHandler.getPlayerHitbox().getX()/100),(int)(playerHandler.getPlayerHitbox().getY()/100));		
 	}
 	public void wallCollision(int predictedGridWall){
@@ -151,7 +157,7 @@ public class GameEngine {
 		}
 	}
 	public void gameOver(){
-		//running = false;
+		running = false;
 		playerHandler.setPlayerHitbox(new Rectangle(playerHandler.getX(),playerHandler.getY(),playerHandler.getW(),playerHandler.getH()));
 		level.generateItems();
 		level.setRunning(false);

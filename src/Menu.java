@@ -9,7 +9,11 @@ public class Menu {
 	
 	private Rectangle playButton= new Rectangle(LevelDesign.WIDTH*LevelDesign.SCALE/2-60,300,100,50);
 	private Rectangle quitButton= new Rectangle(LevelDesign.WIDTH*LevelDesign.SCALE/2-60,400,100,50);
+	private Animation anim;
 	
+	public Menu(Animation anim){
+		this.anim = anim;
+	}
 	public Rectangle getPlayButton() {
 		return playButton;
 	}
@@ -19,6 +23,9 @@ public class Menu {
 	}
 	
 	public void render(Graphics g){
+
+    	g.drawImage(anim.getBackgroundMenu(), 0, 0,LevelDesign.WIDTH*LevelDesign.SCALE,LevelDesign.HEIGHT*LevelDesign.SCALE, null);
+		
 		Font titleFont = new Font("Sherif", Font.BOLD,60);
 		Font menuFont = new Font("Sherif", Font.BOLD,40);
 		
@@ -29,8 +36,8 @@ public class Menu {
 		
 		//Menu
 		g.setFont(menuFont);
-		((Graphics2D)g).draw(playButton);
-		((Graphics2D)g).draw(quitButton);
+		g.drawRect((int)playButton.getX(),(int)playButton.getY(),(int)playButton.getWidth(),(int)playButton.getHeight());
+		g.drawRect((int)quitButton.getX(),(int)quitButton.getY(),(int)quitButton.getWidth(),(int)quitButton.getHeight());
 		
 		g.drawString("Play",playButton.x+10,playButton.y+40);
 		g.drawString("Quit",quitButton.x+10,quitButton.y+40);

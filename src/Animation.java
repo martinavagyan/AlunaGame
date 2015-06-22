@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 
 public class Animation {
@@ -14,11 +15,15 @@ public class Animation {
 	private BufferedImage nutImage;
 	private BufferedImage keyImage;
 	private BufferedImage fireImage;
+	private BufferedImage backgroundMenu;
+	private BufferedImage backgroundGameOver;
+	private ImageIcon gameIcon;
 	
 	private ArrayList<BufferedImage> fireAnim;
 	private int animationCounter;
 	
-	private BufferedImage platfromObstacleImage;
+	private BufferedImage platfromObstacleImage;	
+
 	
 	private Image backgroundTheme;
 	
@@ -43,10 +48,15 @@ public class Animation {
 		
 			platformWallImage = ImageIO.read(new File("res/platformWall.png"));
 			
-			nutImage = ImageIO.read(new File("res/nut2.png"));
+			nutImage = ImageIO.read(new File("res/nutIcon.png"));
 			
-			keyImage = ImageIO.read(new File("res/key.png"));
+			keyImage = ImageIO.read(new File("res/keyIcon.png"));
 			
+			gameIcon = new ImageIcon("res/nutIcon.png");
+			
+			backgroundMenu = ImageIO.read(new File("res/backgroundImageMenu.jpg"));
+			
+			backgroundGameOver = ImageIO.read(new File("res/backgroundGameOver.jpg"));
 			
 			//loadFireAnimation
 			
@@ -64,6 +74,10 @@ public class Animation {
 		
 	}
 	
+	public ImageIcon getImageIcon(){
+		return gameIcon;
+	}
+	
 	public BufferedImage getAnimationFire(){		
 		animationCounter++;	
 		if(animationCounter/10 +1>= fireAnim.size()){
@@ -74,9 +88,18 @@ public class Animation {
 		
 	}
 	
+	public BufferedImage getBackgroundMenu(){
+		return backgroundMenu;
+	}	
+	
+	public BufferedImage getBackgroundGameOver(){
+		return backgroundGameOver;
+	}	
+	
 	public BufferedImage getFireImage(){
 		return fireImage;
 	}	
+	
 	public BufferedImage getPlayerImageRight(){
 		return playerImageRight;
 	}	

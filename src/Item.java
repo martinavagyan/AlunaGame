@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 public class Item {
 
-	private int w = 25,h= 35;					//width, height of a nut
+	private int w = 40,h= 40;					//width, height of a nut
 	private ArrayList<GameItem> items;	//array containing all the nuts
 	private int[][] itemGrid;					//placement grid 
 	private int index;
@@ -55,7 +55,7 @@ public class Item {
 	
 	public void addKey(int xPlacement, int yPlacement){
 		//Place the keys and compensate for the size of the platform 
-		items.add(index, new KeyItem(new Rectangle(xPlacement*100+40,yPlacement*100-18,w+10,h),anim)); 
+		items.add(index, new KeyItem(new Rectangle(xPlacement*100+40,yPlacement*100-18,w+20,h+20),anim)); 
 		addToGrid(xPlacement,yPlacement);
 	}
 	

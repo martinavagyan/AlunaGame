@@ -8,22 +8,29 @@ import java.awt.event.KeyListener;
 public class PlayerController implements KeyListener{
 	
 	
-	private static final int playerSize = 70;
-	protected int x=0,y=500;						//Coordinates of the starting position
-	protected int w=1,h=1;							//Dimensions of the object HitBox
+	private   int playerSize, x,y,w,h;
 	protected int xD=0; 							//Direction of movement on x axis
 	private double predictedX,predictedY;			//predicted coordinates of the HitBox
+	private Rectangle playerHitbox;
 	
-	//Player gears
-	private int nutCount = 0;	
-	private boolean hasKey = false;
+	private PlayerObject player;
 	
+	public PlayerObject getPlayer() {
+		return player;
+	}
+
+
+
+	public void setPlayer(PlayerObject player) {
+		this.player = player;
+	}
+
 	private final double startingGravity = 1;
 	private final double gravityAcceleration = 1.09;//The constant gravity acceleration
 	private double pseudoGravity = startingGravity;		        //Pseudo-gravity on y axis
 	protected final int maxGravityVelocity = 19;	//The max speed the acceleration can have
 	private final int jumpAcceleration = 5;			//Jump acceleration
-	private final int objectScaleConstant = 100;	//The general grid constant
+	private  int objectScaleConstant;	//The general grid constant
 
 	
 	
@@ -33,8 +40,18 @@ public class PlayerController implements KeyListener{
 	protected boolean rightKey = true;				//Right key possible when true
 	private boolean jumpReleased = false;			//Jump is only allowed from platform
 	
-	//Player hitbox
-	private Rectangle playerHitbox = new Rectangle(x+objectScaleConstant/2,y,w,h);
+	
+	public PlayerController(){
+		player = new PlayerObject();
+		this.x =  player.getX();
+		this.y =  player.getY();
+		this.w =  player.getW();
+		this.h =  player.getH();
+		this.playerSize =  player.getPLAYER_SIZE();
+		this.playerHitbox = player.getPlayerHitbox();
+		this.objectScaleConstant = player.getOBJECT_SCALE();
+	}
+	
 	
 	
 	//Getters & Setters
@@ -86,9 +103,7 @@ public class PlayerController implements KeyListener{
 		this.xD = xD;
 	}
 	
-	public void setHasKey(boolean key){
-		hasKey = key;
-	}
+	
 	
 	public void setPlayerHitbox(Rectangle hitbox){
 		this.playerHitbox = hitbox;
