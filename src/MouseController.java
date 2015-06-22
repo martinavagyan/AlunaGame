@@ -35,8 +35,11 @@ public class MouseController implements MouseListener{
 		if(level.isActiveMenu()){
 			if((mouseX >= menu.getPlayButton().x) && (mouseX <= (menu.getPlayButton().x+menu.getPlayButton().width))){
 				if((mouseY >= menu.getPlayButton().y) && (mouseY <= (menu.getPlayButton().y + menu.getPlayButton().height))){
-					//The Play button was pressed
-					level.setRunning(true);
+					//The Play button was pressed	
+					
+					level.setActiveSelectLevel(true);
+					level.setActiveMenu(false);
+					level.repaint();
 				}
 			}
 			

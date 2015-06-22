@@ -27,17 +27,24 @@ public class LevelDesign extends JPanel{
 	private Item gameItems = new Item(animation);
 	private Menu menu = new Menu(animation);
 	private SelectLevel gameLevels = new SelectLevel(animation);
-	private LevelLoader levelLoad = new LevelLoader(platforms);
+	private LevelLoader levelLoad = new LevelLoader(platforms,gameItems);
 	
+	public LevelLoader getLevelLoad() {
+		return levelLoad;
+	}
+
+	public void setLevelLoad(LevelLoader levelLoad) {
+		this.levelLoad = levelLoad;
+	}
+
 	private BufferedImage playerImage;	
-	private BufferedImage platformImage;	
-	private BufferedImage wallImage;
 	private ImageIcon newNodeIcon = new ImageIcon("res/nutIcon.png");
 	
 	//Control variable for the state of the game:
 	private boolean running = false;
-	private boolean activeMenu = false;
+	private boolean activeMenu = true;
 	private boolean activeSelectLevel = false;
+	private boolean gameOver = false;
 	
 	
 	
@@ -79,50 +86,32 @@ public class LevelDesign extends JPanel{
 			case 1:
 				levelLoad.level2();
 				break;
+			case 2:
+				levelLoad.level3();
+				break;
+			case 3:
+				levelLoad.level2();
+				break;
+			case 4:
+				levelLoad.level2();
+				break;
+			case 5:
+				levelLoad.level2();
+				break;
+			case 6:
+				levelLoad.level2();
+				break;
 			default:
 				levelLoad.level2();
 				break;				
 		}
 	}
 	
-	public void generateLevelPlatform(){
-		
-		platforms.addCloud(8, 6);
-		platforms.addCloud(0, 5);
-		platforms.addCloud(1, 3);
-		platforms.addCloud(2, 4);
-		platforms.addCloud(3, 4);
-		platforms.addWall(4, 2);
-		platforms.addWall(4, 3);
-		platforms.addWall(4, 4);		
-		platforms.addCloud(4, 2);
-		platforms.addCloud(4, 4);
-		platforms.addCloud(4, 5);
-		platforms.addCloud(5, 2);
-		platforms.addCloud(5, 4);
-		platforms.addCloud(5, 5);
-		platforms.addCloud(6, 2);
-		platforms.addCloud(7, 2);
-		platforms.addCloud(8, 1);
-		platforms.addCloud(8, 3);	
-		platforms.addObstacle(8, 5);	
-		platforms.addObstacle(3, 5);
-	}
-	
-	
-	public void generateItems(){
-		
-		gameItems.addNut(1, 3);
-		gameItems.addNut(2, 2); 
-		gameItems.addNut(5, 4);
-		gameItems.addKey(5,2);
-	}
 	public Platforms getPlatforms(){
 		return platforms;
 	}
 	
 	public void paintComponent(Graphics g){	
-		int size;	
 	    if(running == true){
 			//Draw the Background	
 	    	g.drawImage(animation.getBackgroundTheme(), 0, 0,WIDTH*SCALE,HEIGHT*SCALE, null);
@@ -145,10 +134,32 @@ public class LevelDesign extends JPanel{
 			}
 			//Draw the Score Panel
 			playerHandler.getPlayer().getPlayerScore().draw(g);
-	    }else{
+			
+			
+				
+			
+			if(playerHandler.getPlayer().getPlayerScore().getLevelKey() != 0){
+				g.drawString("EXIT", levelLoad.getExitX()*100,levelLoad.getExitX()*100);
+			}
+	    }
+	    else if (activeSelectLevel){
+	    	revalidate();
+	    	repaint();
+	    	gameLevels.render(g);
+	    }
+	    else if(activeMenu){
 	    	menu.render(g);
 	    }
 	}
+	
+	public boolean isGameOver() {
+		return gameOver;
+	}
+
+	public void setGameOver(boolean gameOver) {
+		this.gameOver = gameOver;
+	}
+
 	
 	public boolean isActiveMenu(){
 		return activeMenu;
@@ -157,6 +168,16 @@ public class LevelDesign extends JPanel{
 	public boolean isActiveSelectLevel(){
 		return activeSelectLevel;
 	}
+	
+	public  void setActiveSelectLevel(boolean i){
+		activeSelectLevel= i;
+	}
+	
+	public  void setActiveMenu(boolean i){
+		activeMenu= i;
+	}
+	
+	
 	public Animation getAnimation() {
 		return animation;
 	}

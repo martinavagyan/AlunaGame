@@ -41,8 +41,14 @@ public class PlayerController implements KeyListener{
 	private boolean jumpReleased = false;			//Jump is only allowed from platform
 	
 	
-	public PlayerController(){
-		player = new PlayerObject();
+	public PlayerController(PlayerObject player){
+		this.player = player;	
+		initPlayer();
+	}
+	
+	public void initPlayer(){
+		predictedX = 0;
+		predictedY = 0;
 		this.x =  player.getX();
 		this.y =  player.getY();
 		this.w =  player.getW();

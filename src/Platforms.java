@@ -7,7 +7,7 @@ public class Platforms {
 	private int w = 80,h= 20;
 	private final int MAX_COLUMN_PLATFORMS = 9;
 	private final int MAX_ROW_PLATFORMS = 7;
-	private ArrayList<PlatformItem> platforms;
+	private ArrayList<PlatformItem> platforms;	
 	private int[][] platformGrid;
 	private int[][] wallGrid;
 	private int index;
@@ -24,6 +24,9 @@ public class Platforms {
 	}
 	public int getMAX_ROW_PLATFORMS(){
 		return MAX_ROW_PLATFORMS;
+	}
+	public void setPlatforms(ArrayList<PlatformItem> platforms) {
+		this.platforms = platforms;
 	}
 	
 	public Platforms(Animation anim){
@@ -72,5 +75,15 @@ public class Platforms {
 	public void addToGrid(int xPlacement, int yPlacement){
 		platformGrid[xPlacement][yPlacement] = index;
 		index++;
+	}
+	public void reset(){
+		platforms.clear();
+		for (int i = 0; i < MAX_COLUMN_PLATFORMS; i++) {
+			for(int j = 0; j <MAX_ROW_PLATFORMS;j++){
+				platformGrid[i][j] = -1;
+				wallGrid[i][j] = -1;
+			}
+		}
+		index = 0;
 	}
 }

@@ -10,6 +10,7 @@ public class Item {
 	private int[][] itemGrid;					//placement grid 
 	private int index;
 	private final int MAX_COLUMN= 9,MAX_ROW= 7;//limits
+	
 	private Animation anim;
 	
 	public Item(Animation anim){
@@ -46,6 +47,15 @@ public class Item {
 		return itemGrid;
 	}
 	
+	public int getMAX_COLUMN() {
+		return MAX_COLUMN;
+	}
+
+	public int getMAX_ROW() {
+		return MAX_ROW;
+	}
+
+	
 	//Methods
 	//Removes the element at index i and returns the arraylist
 	public void removeItem(int i,int x, int y) {
@@ -68,5 +78,15 @@ public class Item {
 	public void addToGrid(int xPlacement, int yPlacement){
 		itemGrid[xPlacement][yPlacement] = index;
 		index++;
+	}
+	
+	public void reset(){
+		items.clear();
+		index = 0;
+		for (int i = 0; i < MAX_COLUMN; i++) {
+			for(int j = 0; j <MAX_ROW;j++){
+				itemGrid[i][j] = -1;
+			}
+		}
 	}
 }

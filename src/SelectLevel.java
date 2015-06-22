@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class SelectLevel {
 	
-	private static final int NUMBEROF_LEVELS = 5;
+	private static final int NUMBEROF_LEVELS = 9;
 	
 	public static int getNumberofLevels() {
 		return NUMBEROF_LEVELS;
@@ -24,7 +24,7 @@ public class SelectLevel {
 	
 	public void generateLevelButtons(){
 		for(int i=0;i<NUMBEROF_LEVELS;i++){
-			levels.add(new Rectangle(i*100,100,80,80));
+			levels.add(new Rectangle(i*100+20,100,80,80));
 		}
 	}
 
@@ -33,12 +33,17 @@ public class SelectLevel {
 	}
 	
 	public void render(Graphics g){
-
-		g.setFont(new Font("Sherif", Font.BOLD,60));	
+		g.drawImage(anim.getBackgroundMenu(), 0, 0,LevelDesign.WIDTH*LevelDesign.SCALE,LevelDesign.HEIGHT*LevelDesign.SCALE, null);
+		g.setFont(new Font("Sherif", Font.BOLD,20));	
 		g.setColor(Color.WHITE);
 		for(int i=0;i<levels.size();i++){
-			g.drawRect((int)levels.get(i).getX(),(int)levels.get(i).getY(),(int)levels.get(i).getWidth(),(int)levels.get(i).getHeight());
-			g.drawString("Level"+i, (int)levels.get(i).getX(),(int)levels.get(i).getY());
+			g.setColor(new Color(97,197,222));
+			g.fillRect((int)levels.get(i).getX(),(int)levels.get(i).getY(),(int)levels.get(i).getWidth(),(int)levels.get(i).getHeight());
+			
+			g.setColor(Color.black);
+			g.drawString("Level"+(i+1), (int)levels.get(i).getX()+2,(int)levels.get(i).getCenterY()+2);
+			g.setColor(Color.white);
+			g.drawString("Level "+(i+1), (int)levels.get(i).getX(),(int)levels.get(i).getCenterY());
 		}
 	}
 }

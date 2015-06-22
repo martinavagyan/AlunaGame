@@ -23,7 +23,7 @@ public class Menu {
 	}
 	
 	public void render(Graphics g){
-
+		
     	g.drawImage(anim.getBackgroundMenu(), 0, 0,LevelDesign.WIDTH*LevelDesign.SCALE,LevelDesign.HEIGHT*LevelDesign.SCALE, null);
 		
 		Font titleFont = new Font("Sherif", Font.BOLD,60);

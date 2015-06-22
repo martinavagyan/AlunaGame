@@ -2,12 +2,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 
 
 public class ScorePanel {
-	private int highScore;
+	private int highScore;	
 	private int nutCount;
+
+
 	private int levelKey;
 	private int h = 100;
 	private int w = 350;
@@ -24,6 +25,16 @@ public class ScorePanel {
 		rect = new Rectangle(x,y,w,h);
 	}
 	
+	public int getNutCount() {
+		return nutCount;
+	}
+	public int getHighScore() {
+		return highScore;
+	}
+	public int getLevelKey() {
+		return levelKey;
+	}
+
 	public void setRect(Rectangle rect) {
 		this.rect = rect;
 	}
@@ -37,11 +48,17 @@ public class ScorePanel {
 		highScore = newScore;
 	}
 	
+	public void reset(){
+		levelKey =0;
+	}
 	
 	public void draw(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Sherif", Font.BOLD,15));
 		//g.drawRect((int)rect.getX(),(int)rect.getY(),(int)rect.getWidth(),(int)rect.getHeight());
 		g.drawString("Health: "+ player.getPlayerHealth() + "  Nuts: "+nutCount + "  Key: " + levelKey + "  High Score: "+highScore, x+20,y+20);
+
+		g.setFont(new Font("Sherif", Font.BOLD,40));
+		
 	}
 }

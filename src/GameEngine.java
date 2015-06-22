@@ -6,11 +6,13 @@ public class GameEngine {
 	private PlayerController playerHandler;
 	private LevelDesign level;
 	private boolean running = true;
+	private PlayerObject player;
 
 	public GameEngine() {
-		playerHandler = new PlayerController();
+		player = new PlayerObject();		
+		playerHandler = new PlayerController(player);
 		level = new LevelDesign(playerHandler);
-
+		
 		while(true){
 			try {
 			    Thread.sleep(16);                 //1000 milliseconds is one second.
@@ -79,6 +81,7 @@ public class GameEngine {
 		underPlatform(predictedGridCell);				//Check if its about to hit a platform
 		onPlatform(predictedGridCell); 					//Check if player is on platform.
 		itemCollision();		
+		isGameOver();
 	}
 	public int getPredictedGridCell(){
 		if(isLegalGrid()){
@@ -95,13 +98,12 @@ public class GameEngine {
 	}
 	
 	private void itemCollision(){
-		if(isLegalGrid()){
+		if(isLegalItemGrid()){
 			return;
 		}
 		int gridCell = level.getGameItems().getItemGrid()[(int)(playerHandler.getPlayerHitbox().getX()/100)][(int)(playerHandler.getPlayerHitbox().getY()/100)];
 
 		if(gridCell !=-1){
-			System.out.println("ture");
 			collectItem(gridCell);		
 		}
 	}
@@ -127,9 +129,13 @@ public class GameEngine {
 			return;
 		}
 		if(predictedGridCell !=-1){
+			
 			playerHandler.getPlayerHitbox().y = (int)level.getPlatforms().getPlatforms().get(predictedGridCell).getRect().getY();
 			playerHandler.setJump(false);
 			freeFall();
+			if(level.getPlatforms().getPlatforms().get(predictedGridCell) instanceof ObstaclePlatform){
+				playerHandler.getPlayer().decrimPlayerHealth(1);
+			}
 		}
 	}
 	public void underPlatform(int predictedGridCell){	
@@ -142,6 +148,12 @@ public class GameEngine {
 	public boolean isLegalGrid(){
 		return (level.getPlatforms().getMAX_COLUMN_PLATFORMS() <= (int)(playerHandler.getPredictedX()/100)|| 
 				level.getPlatforms().getMAX_ROW_PLATFORMS()    <= (int)playerHandler.getPredictedY()/100);
+	}
+	
+	
+	public boolean isLegalItemGrid(){
+		return (level.getGameItems().getMAX_COLUMN() <= (int)(playerHandler.getPlayerHitbox().getX()/100)|| 
+				level.getGameItems().getMAX_ROW()    <= (int)playerHandler.getPlayerHitbox().getY()/100);
 	}
 	public void insideWindow(){
 		// Check according to prediction for x and y coordinates
@@ -156,11 +168,28 @@ public class GameEngine {
 			playerHandler.setXD(0);
 		}
 	}
+	public void isGameOver(){
+		if(playerHandler.getPlayer().getPlayerHealth()<=0){
+			gameOver();
+		}
+		if(player.getPlayerScore().getLevelKey() !=0){
+			if((int)(playerHandler.getPlayerHitbox().getX()/100) == level.getLevelLoad().getExitX() &&
+			   (int)(playerHandler.getPlayerHitbox().getY()/100) == level.getLevelLoad().getExitY()){
+				playerHandler.getPlayer().getPlayerScore().setHighScore(playerHandler.getPlayer().getPlayerScore().getHighScore()+
+						playerHandler.getPlayer().getPlayerScore().getNutCount());
+				gameOver();
+			}
+		}
+	}
+	
 	public void gameOver(){
-		running = false;
-		playerHandler.setPlayerHitbox(new Rectangle(playerHandler.getX(),playerHandler.getY(),playerHandler.getW(),playerHandler.getH()));
-		level.generateItems();
 		level.setRunning(false);
+		level.setActiveSelectLevel(true);
+		level.getPlatforms().reset();
+		level.getGameItems().reset();
+		playerHandler.setPlayerHitbox(new Rectangle(playerHandler.getX(),playerHandler.getY(),playerHandler.getW(),playerHandler.getH()));
+		playerHandler.getPlayer().reset();
+		playerHandler.getPlayer().getPlayerScore().reset();
 	}
 	public void freeFall(){
 		playerHandler.setPseudoGravity(1);

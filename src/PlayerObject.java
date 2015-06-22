@@ -10,16 +10,43 @@ public class PlayerObject {
 	private Rectangle playerHitbox;
 	
 	private static final int playerSize = 70;
-	private int x=0,y=500;						//Coordinates of the starting position
-	private int w=1,h=1;							//Dimensions of the object HitBox
+	private int x=OBJECT_SCALE/2,y=500;			//Coordinates of the default starting position
+	private int eX = 100,eY = 100;
+	
+	private int w=1,h=1;						//Dimensions of the object HitBox
 	private int xD=0; 							//Direction of movement on x axis
 	private int playerHealth = MAX_HEALTH;
 	
 	
 
+	public int geteX() {
+		return eX;
+	}
+
+
+	public void seteX(int eX) {
+		this.eX = eX;
+	}
+
+
+	public int geteY() {
+		return eY;
+	}
+
+
+	public void seteY(int eY) {
+		this.eY = eY;
+	}
+	
+	
+	public void decrimPlayerHealth(int playerHealth) {
+		this.playerHealth-=playerHealth;
+	}
+
+
 	PlayerObject(){
 		playerScore = new ScorePanel(this);
-		playerHitbox = new Rectangle(x+OBJECT_SCALE/2,y,w,h);
+		playerHitbox = new Rectangle(x,y,w,h);
 	}
 	
 	
@@ -113,6 +140,10 @@ public class PlayerObject {
 
 	public static int getPlayersize() {
 		return playerSize;
+	}
+	
+	public void reset(){
+		 playerHealth = MAX_HEALTH;
 	}
 
 	private double predictedX,predictedY;			//predicted coordinates of the HitBox
