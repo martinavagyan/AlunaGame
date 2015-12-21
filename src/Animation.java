@@ -18,13 +18,14 @@ public class Animation {
 	private BufferedImage backgroundMenu;
 	private BufferedImage backgroundGameOver;
 	private ImageIcon gameIcon;
+	private String path = "res/";             
 	
 	private ArrayList<BufferedImage> fireAnim;
 	private int animationCounter;
 	
 	private BufferedImage platfromObstacleImage;	
 
-	
+
 	private Image backgroundTheme;
 	
 	public Animation(){
@@ -32,41 +33,41 @@ public class Animation {
 		fireAnim = new ArrayList<BufferedImage>();
 		//read player image
 		try {
-			playerImageRight = ImageIO.read(new File("res/0r.png"));
+			playerImageRight = ImageIO.read(new File(path+"0r.png"));
 
 
-			playerImageLeft = ImageIO.read(new File("res/0l.png"));
+			playerImageLeft = ImageIO.read(new File(path+"0l.png"));
 
 
-			backgroundTheme = ImageIO.read(new File("res/background4.png"));
+			backgroundTheme = ImageIO.read(new File(path+"background4.png"));
 
 
-			platformCloudImage = ImageIO.read(new File("res/platformCloud.png"));
+			platformCloudImage = ImageIO.read(new File(path+"platformCloud.png"));
 			
-			platfromObstacleImage = ImageIO.read(new File("res/platformObstacle.png"));
+			platfromObstacleImage = ImageIO.read(new File(path+"platformObstacle.png"));
 				
 		
-			platformWallImage = ImageIO.read(new File("res/platformWall.png"));
+			platformWallImage = ImageIO.read(new File(path+"platformWall.png"));
 			
-			nutImage = ImageIO.read(new File("res/nutIcon.png"));
+			nutImage = ImageIO.read(new File(path+"nutIcon.png"));
 			
-			keyImage = ImageIO.read(new File("res/keyIcon.png"));
+			keyImage = ImageIO.read(new File(path+"keyIcon.png"));
 			
-			gameIcon = new ImageIcon("res/nutIcon.png");
+			gameIcon = new ImageIcon(path+"nutIcon.png");
 			
-			backgroundMenu = ImageIO.read(new File("res/backgroundImageMenu.jpg"));
+			backgroundMenu = ImageIO.read(new File(path+"backgroundImageMenu.jpg"));
 			
-			backgroundGameOver = ImageIO.read(new File("res/backgroundGameOver.jpg"));
+			backgroundGameOver = ImageIO.read(new File(path+"backgroundGameOver.jpg"));
 			
 			//loadFireAnimation
 			
-			fireAnim.add(ImageIO.read(new File("res/fire1.png")));
-			fireAnim.add(ImageIO.read(new File("res/fire2.png")));
-			fireAnim.add(ImageIO.read(new File("res/fire3.png")));
-			fireAnim.add(ImageIO.read(new File("res/fire4.png")));
-			fireAnim.add(ImageIO.read(new File("res/fire5.png")));
-			fireAnim.add(ImageIO.read(new File("res/fire7.png")));
-			fireAnim.add(ImageIO.read(new File("res/fire8.png")));
+			fireAnim.add(ImageIO.read(new File(path+"fire1.png")));
+			fireAnim.add(ImageIO.read(new File(path+"fire2.png")));
+			fireAnim.add(ImageIO.read(new File(path+"fire3.png")));
+			fireAnim.add(ImageIO.read(new File(path+"fire4.png")));
+			fireAnim.add(ImageIO.read(new File(path+"fire5.png")));
+			fireAnim.add(ImageIO.read(new File(path+"fire7.png")));
+			fireAnim.add(ImageIO.read(new File(path+"fire8.png")));
 			
 		} catch(Exception e){
 			e.printStackTrace();
